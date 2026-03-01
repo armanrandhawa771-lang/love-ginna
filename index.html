@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Miss Universe Edition 💖</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+  overflow-x:hidden;
+  color:white;
+}
+
+/* Floating Hearts */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size:20px;
+  animation: floatUp 5s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes floatUp {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-100vh);}
+}
+
+/* Password Page */
+#passwordPage {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+input {
+  padding:12px;
+  font-size:18px;
+  border-radius:10px;
+  border:none;
+}
+
+button {
+  padding:12px 25px;
+  margin-top:15px;
+  border:none;
+  border-radius:20px;
+  background:#ff4b6e;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover {
+  background:#ff1f4d;
+  transform:scale(1.1);
+}
+
+#book {
+  display:none;
+  perspective:2000px;
+}
+
+.page {
+  min-height:100vh;
+  padding:60px;
+  text-align:center;
+  animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+.cover {
+  background:url('images/cover.jpg') center/cover;
+  text-shadow:2px 2px 15px black;
+}
+
+h1 {
+  font-family:'Playfair Display', serif;
+  font-size:60px;
+}
+
+img {
+  width:250px;
+  border-radius:20px;
+  margin:15px;
+  box-shadow:0 15px 30px rgba(0,0,0,0.4);
+  transition:0.4s;
+}
+
+img:hover {
+  transform:scale(1.1) rotate(3deg);
+}
+
+#surprisePage {
+  display:none;
+}
+
+#proposal {
+  display:none;
+  font-size:30px;
+}
+
+/* Fireworks */
+.firework {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background: yellow;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  to {
+    transform: translateY(-200px) scale(10);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Hearts Script -->
+<script>
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.innerHTML = "💖";
+  heart.className = "heart";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (Math.random()*20+15)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>{heart.remove();},5000);
+},500);
+</script>
+
+<!-- PASSWORD -->
+<div id="passwordPage">
+  <h2>🔒 Secret Love Magazine</h2>
+  <p>Question: Arman's Birth Date?</p>
+  <input type="text" id="pass">
+  <button onclick="unlock()">Enter</button>
+</div>
+
+<!-- BOOK -->
+<div id="book">
+
+<audio autoplay loop>
+  <source src="beautiful.mp3" type="audio/mp3">
+</audio>
+
+<div class="page cover">
+  <h1>Miss Universe Edition 👑</h1>
+  <h2>Featuring Ginna Sandhu 💖</h2>
+  <p id="requestTimer"></p>
+</div>
+
+<div class="page">
+  <h2>Our Timeline 💫</h2>
+  <p>First Saw You: 4 August 2025</p>
+  <p>Instagram Request: 7 November 2025</p>
+  <p>First Message: 26 November 2025</p>
+  <p>First Date: 14 February 2026</p>
+  <h3 id="messageTimer"></h3>
+</div>
+
+<div class="page">
+  <h2>Punjabi Shayari 👑</h2>
+  <p>
+  "Rab ne jadon tenu banaya hovega,  
+  Oh din duniya da sab ton sohnaa hovega,  
+  Ginna tu sirf sohni nahi,  
+  Tu Rab di sab ton khoobsurat creation ae." 💖
+  </p>
+
+  <p>
+  "4 August da oh pal ajj vi dil ch vasda ae,  
+  Jadon pehli vaar tenu vekhya si,  
+  Oh pal meri kismat badal gaya si." 🌙
+  </p>
+</div>
+
+<div class="page">
+  <h2>Our Memories 📸</h2>
+  <img src="images/photo1.jpg">
+  <img src="images/photo2.jpg">
+  <img src="images/photo3.jpg">
+  <br><br>
+  <button onclick="openSurprise()">Open Hidden Surprise 💌</button>
+</div>
+
+<div class="page" id="surprisePage">
+  <h2>My Forever 💖</h2>
+  <img src="images/proposal.jpg">
+  <br><br>
+  <button onclick="showProposal()">Final Surprise 💍</button>
+</div>
+
+<div class="page" id="proposal">
+  <h1>Ginna Sandhu 💖</h1>
+  <h2>Will You Be Mine Forever? 💍</h2>
+</div>
+
+</div>
+
+<script>
+function unlock(){
+  if(document.getElementById("pass").value==="1-08-2006"){
+    document.getElementById("passwordPage").style.display="none";
+    document.getElementById("book").style.display="block";
+  } else {
+    alert("Wrong Password ❤️");
+  }
+}
+
+function updateTimers(){
+  let reqDate=new Date("Nov 7, 2025");
+  let msgDate=new Date("Nov 26, 2025");
+  let now=new Date();
+
+  let reqDays=Math.floor((now-reqDate)/(1000*60*60*24));
+  let msgDays=Math.floor((now-msgDate)/(1000*60*60*24));
+
+  document.getElementById("requestTimer").innerHTML="Time since I requested you: "+reqDays+" days 💌";
+  document.getElementById("messageTimer").innerHTML="Time since first message: "+msgDays+" days ❤️";
+}
+updateTimers();
+
+function openSurprise(){
+  document.getElementById("surprisePage").style.display="block";
+  launchFireworks();
+}
+
+function showProposal(){
+  document.getElementById("proposal").style.display="block";
+  launchFireworks();
+}
+
+function launchFireworks(){
+  for(let i=0;i<20;i++){
+    let fw=document.createElement("div");
+    fw.className="firework";
+    fw.style.left=Math.random()*100+"vw";
+    fw.style.top=Math.random()*100+"vh";
+    document.body.appendChild(fw);
+    setTimeout(()=>fw.remove(),1000);
+  }
+}
+</script>
+
+</body>
+</html>
